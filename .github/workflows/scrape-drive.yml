@@ -10,7 +10,7 @@ on:
       - ".github/workflows/scrape-drive.yml"
 
 permissions:
-  contents: write   # allow commit/push of files.json
+  contents: write
 
 jobs:
   scrape:
@@ -44,3 +44,11 @@ jobs:
             echo "No changes."
           fi
 
+      - name: Upload debug artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: scrape-debug
+          path: |
+            debug.html
+            debug-screenshot.png
+          if-no-files-found: ignore
