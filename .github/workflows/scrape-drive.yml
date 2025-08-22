@@ -2,12 +2,15 @@ name: Scrape Google Drive (no API)
 
 on:
   schedule:
-    - cron: "0 */6 * * *"   # every 6 hours
+    - cron: "0 */6 * * *"
   workflow_dispatch: {}
   push:
     paths:
       - "scrape.js"
       - ".github/workflows/scrape-drive.yml"
+
+permissions:
+  contents: write   # allow commit/push of files.json
 
 jobs:
   scrape:
@@ -40,3 +43,4 @@ jobs:
           else
             echo "No changes."
           fi
+
