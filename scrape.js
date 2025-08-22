@@ -37,7 +37,7 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     console.error('No tiles found in the embedded view.');
   }
 
-  // Scroll-load tiles
+  // Scroll to load all tiles
   let stable = 0, lastCount = 0;
   for (let i = 0; i < 80; i++) {
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
@@ -45,7 +45,7 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     const count = await page.evaluate(() => document.querySelectorAll('a[href*="/file/d/"], img[src*="thumbnail?id="]').length);
     if (count === lastCount) {
       stable++;
-      if (stable >= 4) break; // likely loaded all
+      if (stable >= 4) break;
     } else {
       stable = 0;
       lastCount = count;
@@ -79,7 +79,7 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     return Array.from(map.values());
   });
 
-  // Save debug snapshot so we can inspect if needed
+  // Debug artifacts (optional)
   fs.writeFileSync('debug.html', await page.content());
   await page.screenshot({ path: 'debug-screenshot.png', fullPage: true });
 
