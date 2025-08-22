@@ -1,12 +1,20 @@
-// Scrapes a public Google Drive folder page (no API) and writes files.json
-// Usage: node scrape.js "<public-folder-url>"
+// Scrapes a PUBLIC Drive folder (no API) via the embedded folder view and writes files.json
+// Usage in workflow: node scrape.js "$DRIVE_FOLDER_URL"   (can be full URL or just the ID)
+
 const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer');
 
-const FOLDER_URL = process.argv[2];
-if (!FOLDER_URL || !/drive\.google\.com\/drive\/folders\//.test(FOLDER_URL)) {
-  console.error('Provide the public folder URL as the first argument.');
+function normalizeFolderId(input) {
+  if (!input) return '';
+  const m = String(input).match(/(?:folders\/|id=)([a-zA-Z0-9_-]{10,})/);
+  return m ? m[1] : String(input);
+}
+const arg = process.argv[2] || '';
+const FOLDER_ID = normalizeFolderId(arg);
+
+if (!FOLDER_ID) {
+  console.error('Provide the public folder URL or raw folder ID as the first argument.');
   process.exit(1);
 }
 
@@ -14,46 +22,54 @@ const sleep = (ms) => new Promise(res => setTimeout(res, ms));
 
 (async () => {
   const browser = await puppeteer.launch({
-    headless: true, // v22 expects boolean
+    headless: true,
     args: ['--no-sandbox','--disable-setuid-sandbox']
   });
   const page = await browser.newPage();
   page.setDefaultNavigationTimeout(120000);
 
-  await page.goto(FOLDER_URL, { waitUntil: 'networkidle2' });
+  // Use the embedded folder viewer (stable markup)
+  const EMBED_URL = `https://drive.google.com/embeddedfolderview?id=${FOLDER_ID}#grid`;
+  await page.goto(EMBED_URL, { waitUntil: 'networkidle2' });
 
-  // Infinite scroll to load all items
-  const seen = new Set();
-  let stableRounds = 0;
-  for (let i = 0; i < 80; i++) {
-    const ids = await page.evaluate(() => {
-      const anchors = Array.from(document.querySelectorAll('a[href*="/file/d/"]'));
-      return anchors.map(a => {
-        const m = a.href.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-        const name = a.getAttribute('aria-label') || a.title || '';
-        return m ? { id: m[1], name } : null;
-      }).filter(Boolean);
+  // Scroll a few times to ensure all tiles render
+  for (let i = 0; i < 30; i++) {
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await sleep(800);
+  }
+
+  // Collect IDs from thumbnail URLs and anchors
+  const items = await page.evaluate(() => {
+    const unique = new Map();
+
+    // Thumbnails like https://drive.google.com/thumbnail?id=FILEID&...
+    document.querySelectorAll('img[src*="thumbnail?id="]').forEach(img => {
+      const m = img.src.match(/[?&]id=([a-zA-Z0-9_-]{10,})/);
+      if (m) {
+        const id = m[1];
+        const name = img.getAttribute('alt') || '';
+        unique.set(id, { id, name });
+      }
     });
 
-    ids.forEach(x => seen.add(JSON.stringify(x)));
+    // Fallback: anchors to /file/d/FILEID/
+    document.querySelectorAll('a[href*="/file/d/"]').forEach(a => {
+      const m = a.href.match(/\/file\/d\/([a-zA-Z0-9_-]{10,})/);
+      if (m) {
+        const id = m[1];
+        const name = a.getAttribute('title') || a.getAttribute('aria-label') || '';
+        if (!unique.has(id)) unique.set(id, { id, name });
+      }
+    });
 
-    const before = seen.size;
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    await sleep(1800); // was page.waitForTimeout
-
-    if (seen.size === before) {
-      stableRounds++;
-      if (stableRounds >= 3) break; // likely reached the end
-    } else {
-      stableRounds = 0;
-    }
-  }
+    return Array.from(unique.values());
+  });
 
   await browser.close();
 
-  const files = Array.from(seen).map(s => JSON.parse(s));
-  files.sort((a,b)=> (a.name||'').localeCompare((b.name||''), undefined, {numeric:true, sensitivity:'base'}));
+  // Basic sort by name (created time not available from this view)
+  items.sort((a,b) => (a.name||'').localeCompare(b.name||'', undefined, {numeric:true, sensitivity:'base'}));
 
-  fs.writeFileSync(path.join(process.cwd(), 'files.json'), JSON.stringify(files, null, 2));
-  console.log(`Wrote files.json with ${files.length} items`);
+  fs.writeFileSync(path.join(process.cwd(), 'files.json'), JSON.stringify(items, null, 2));
+  console.log(`Wrote files.json with ${items.length} items from ${EMBED_URL}`);
 })();
