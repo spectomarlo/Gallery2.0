@@ -36,4 +36,52 @@
     .site-title { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: 0.2px; }
 
     /* Page wrap */
-    .wrap { max-width: var(--maxw)
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 16px 10px 40px; }
+
+    /* Masonry — seamless, and 3× more columns than before */
+    .masonry { column-gap: var(--gap); column-count: 3; }   /* base for very small screens */
+    figure.item {
+      margin: 0; padding: 0; line-height: 0;
+      break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+      -moz-column-break-inside: avoid;
+      -ms-break-inside: avoid;
+    }
+    .item a { display:block; text-decoration: none; color: inherit; }
+
+    /* NO CROPPING: keep natural aspect ratio */
+    .item img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 0;
+      margin: 0;
+      transition: transform .15s ease;
+    }
+    .item:hover img { transform: translateY(-1px) scale(1.003); }
+
+    /* 3× column counts vs previous setup */
+    @media (min-width: 360px){ .masonry { column-count: 6; } }
+    @media (min-width: 640px){ .masonry { column-count: 9; } }
+    @media (min-width: 900px){ .masonry { column-count: 12; } }
+    @media (min-width: 1200px){ .masonry { column-count: 15; } }
+
+    .status { text-align:center; color:#666; padding:12px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="site-title">Gemini Generated Muse Portfolio</h1>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div id="status" class="status">Loading images…</div>
+    <div id="gallery" class="masonry" hidden></div>
+  </main>
+
+  <!-- bump v= when you edit JS to bust cache -->
+  <script src="script.js?v=5"></script>
+</body>
+</html>
