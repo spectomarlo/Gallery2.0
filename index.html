@@ -11,7 +11,7 @@
   <link rel="dns-prefetch" href="//lh3.googleusercontent.com">
 
   <style>
-    :root { --gap: 0; --maxw: 1600px; } /* absolutely no spaces between tiles */
+    :root { --gap: 0; --maxw: 1600px; }
     * { box-sizing: border-box; }
     html, body { height: 100%; }
     body {
@@ -36,51 +36,4 @@
     .site-title { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: 0.2px; }
 
     /* Page wrap */
-    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 16px 10px 40px; }
-
-    /* Masonry with zero gaps */
-    .masonry { column-gap: var(--gap); line-height: 0; } /* line-height:0 helps avoid hairlines */
-    figure.item {
-      margin: 0; padding: 0; line-height: 0;
-      break-inside: avoid;
-      -webkit-column-break-inside: avoid;
-      -moz-column-break-inside: avoid;
-      -ms-break-inside: avoid;
-    }
-    .item a { display:block; text-decoration: none; color: inherit; }
-
-    /* NO CROPPING: let images use their natural aspect ratio */
-    .item img {
-      display: block;
-      width: 100%;
-      height: auto;        /* ← shows full image, no crop */
-      border: 0;
-      margin: 0;
-      transition: transform .15s ease;
-    }
-    .item:hover img { transform: translateY(-1px) scale(1.003); }
-
-    /* Responsive columns (edit as you like) */
-    @media (min-width: 360px){ .masonry { column-count: 2; } }
-    @media (min-width: 640px){ .masonry { column-count: 3; } }
-    @media (min-width: 900px){ .masonry { column-count: 4; } }
-    @media (min-width: 1200px){ .masonry { column-count: 5; } }
-
-    .status { text-align:center; color:#666; padding:12px; }
-  </style>
-</head>
-<body>
-  <header class="site-header">
-    <div class="header-inner">
-      <h1 class="site-title">Gemini Generated Muse Portfolio</h1>
-    </div>
-  </header>
-
-  <main class="wrap">
-    <div id="status" class="status">Loading images…</div>
-    <div id="gallery" class="masonry" hidden></div>
-  </main>
-
-  <script src="script.js?v=4"></script>
-</body>
-</html>
+    .wrap { max-width: var(--maxw)
