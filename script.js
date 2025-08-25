@@ -1,4 +1,4 @@
-// Seamless tiles, min 350px / max 400px height, faster loads, click opens full image (same tab)
+// Seamless masonry, NO CROPPING, fast thumbnails, click opens full image (same tab)
 (async () => {
   const status = document.getElementById('status');
   const gallery = document.getElementById('gallery');
@@ -22,11 +22,11 @@
 
       const { id, name, rk } = fig.dataset;
 
-      // Anchor: clicking opens full image in SAME TAB (default)
+      // Clicking opens full image in SAME TAB (default)
       const a = document.createElement('a');
       a.href = viewUrl(id, rk || '');
 
-      // Optimized image element
+      // Optimized image element (no crop; natural aspect ratio)
       const img = new Image();
       img.loading = 'lazy';
       img.decoding = 'async';
@@ -44,7 +44,7 @@
       ].join(', ');
       img.sizes = '(min-width:1200px) 20vw, (min-width:900px) 25vw, (min-width:640px) 33vw, (min-width:360px) 50vw, 100vw';
 
-      // Robust fallbacks if thumbnails are blocked
+      // Fallbacks if thumbnails are blocked
       img.onerror = () => {
         if (img.dataset.fail === '1') {
           img.src = gucUrl(id);
@@ -64,7 +64,8 @@
   }, { root: null, rootMargin: '600px 0px', threshold: 0.01 });
 
   try {
-    const res = await fetch('files.json', { cache: 'no-store' });
+    // Cache-bust files.json so changes show immediately
+    const res = await fetch('files.json?' + Date.now(), { cache: 'no-store' });
     if (!res.ok) throw new Error('files.json missing');
     let files = await res.json();
 
@@ -76,7 +77,7 @@
       return;
     }
 
-    // Create empty figure shells (zero margins)
+    // Create empty figure shells (zero margins; line-height:0 to avoid hairlines)
     gallery.innerHTML = files.map(f =>
       `<figure class="item" data-id="${f.id}" data-rk="${f.rk || ''}" data-name="${(f.name||'').replace(/"/g,'&quot;')}"></figure>`
     ).join('');
