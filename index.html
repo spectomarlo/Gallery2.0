@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Masonry Gallery</title>
+  <title>Gemini Generated Muse Portfolio</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <!-- Speed: preconnect/DNS for image hosts -->
@@ -12,44 +12,73 @@
   <link rel="dns-prefetch" href="//lh3.googleusercontent.com">
 
   <style>
-    :root { --gap: 0; --maxw: 1400px; }          /* no spaces between tiles */
+    :root { --gap: 0; --maxw: 1600px; } /* no spaces between tiles */
     * { box-sizing: border-box; }
-    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0b0b; color:#f3f3f3; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: #ffffff;         /* WHITE background */
+      color: #111;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    header.site-header {
+      position: sticky; top: 0; z-index: 10;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+    }
+    .header-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 14px 12px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .site-title {
+      margin: 0; font-size: 18px; font-weight: 700; letter-spacing: 0.2px;
+    }
+
     .wrap { max-width: var(--maxw); margin: 0 auto; padding: 16px 10px 40px; }
-    h1 { font-size: 18px; margin: 6px 0 14px; font-weight: 600; opacity:.85; }
 
     /* Masonry with zero gaps */
     .masonry { column-gap: var(--gap); }
-    .item { break-inside: avoid; -webkit-column-break-inside: avoid; margin-bottom: var(--gap); }
+    figure.item {             /* kill default figure margins */
+      margin: 0;
+      padding: 0;
+      break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+      -moz-column-break-inside: avoid;
+      -ms-break-inside: avoid;
+    }
     .item a { display:block; text-decoration: none; color: inherit; }
     .item img {
-      width: 100%;
-      height: auto;
-      max-height: 400px;           /* <= your requirement */
-      object-fit: cover;           /* clean crop if image is taller */
       display: block;
-      border-radius: 0;            /* no rounded corners so tiles butt together */
+      width: 100%;
+      height: clamp(350px, 30vw, 400px);  /* min 350px, max 400px */
+      object-fit: cover;                  /* crop to fit height with no gaps */
+      border: 0;
+      margin: 0;
     }
 
-    /* Responsive column counts (edit if you want) */
+    /* Responsive column counts */
     @media (min-width: 360px){ .masonry { column-count: 2; } }
     @media (min-width: 640px){ .masonry { column-count: 3; } }
     @media (min-width: 900px){ .masonry { column-count: 4; } }
     @media (min-width: 1200px){ .masonry { column-count: 5; } }
 
-    /* Optional subtle hover (remove if you want zero effects) */
-    .item img { transition: transform .18s ease; }
-    .item:hover img { transform: translateY(-1px) scale(1.005); }
-
-    .status { text-align:center; color:#9a9a9a; padding:12px; }
+    .status { text-align:center; color:#666; padding:12px; }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Gallery</h1>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="site-title">Gemini Generated Muse Portfolio</h1>
+    </div>
+  </header>
+
+  <main class="wrap">
     <div id="status" class="status">Loading images…</div>
     <div id="gallery" class="masonry" hidden></div>
-  </div>
+  </main>
 
   <script src="script.js"></script>
 </body>
