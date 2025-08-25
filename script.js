@@ -1,4 +1,4 @@
-// Seamless masonry, NO CROPPING, fast thumbnails, click opens full image (same tab)
+// 3× smaller tiles via higher column counts; seamless, no-crop, fast thumbs
 (async () => {
   const status = document.getElementById('status');
   const gallery = document.getElementById('gallery');
@@ -8,12 +8,12 @@
   const withRK = (base, id, rk, extra='') =>
     `${base}${base.includes('?') ? '&' : '?'}${extra ? extra + '&' : ''}id=${encodeURIComponent(id)}${rk ? `&resourcekey=${encodeURIComponent(rk)}` : ''}`;
 
-  // Build URLs
-  const thumbUrl = (id, rk, w=1000) => withRK('https://drive.google.com/thumbnail', id, rk, `sz=w${w}`);
-  const viewUrl  = (id, rk)          => withRK('https://drive.google.com/uc?export=view', id, rk);
-  const gucUrl   = (id, w=2000)      => `https://lh3.googleusercontent.com/d/${id}=w${w}`;
+  // Smaller thumbnails (faster) since each tile is much narrower now
+  const thumbUrl = (id, rk, w=400) => withRK('https://drive.google.com/thumbnail', id, rk, `sz=w${w}`);
+  const viewUrl  = (id, rk)        => withRK('https://drive.google.com/uc?export=view', id, rk);
+  const gucUrl   = (id, w=800)     => `https://lh3.googleusercontent.com/d/${id}=w${w}`;
 
-  // Lazy attach images only when near viewport (for speed)
+  // Lazy attach images only when near viewport (speed + memory)
   const observer = new IntersectionObserver((entries) => {
     for (const entry of entries) {
       if (!entry.isIntersecting) continue;
@@ -34,15 +34,16 @@
       img.referrerPolicy = 'no-referrer';
       img.alt = name || '';
 
-      // Serve responsive thumbnails for speed
-      const w1 = 600, w2 = 1000, w3 = 1600;
+      // Responsive thumbs that match the new column widths
+      // (approx. 16.7vw, 11.1vw, 8.3vw, 6.7vw at the breakpoints)
+      const w1 = 200, w2 = 400, w3 = 800;
       img.src = thumbUrl(id, rk, w2);
       img.srcset = [
         `${thumbUrl(id, rk, w1)} ${w1}w`,
         `${thumbUrl(id, rk, w2)} ${w2}w`,
         `${thumbUrl(id, rk, w3)} ${w3}w`
       ].join(', ');
-      img.sizes = '(min-width:1200px) 20vw, (min-width:900px) 25vw, (min-width:640px) 33vw, (min-width:360px) 50vw, 100vw';
+      img.sizes = '(min-width:1200px) 6.7vw, (min-width:900px) 8.3vw, (min-width:640px) 11.1vw, (min-width:360px) 16.7vw, 33vw';
 
       // Fallbacks if thumbnails are blocked
       img.onerror = () => {
@@ -64,7 +65,7 @@
   }, { root: null, rootMargin: '600px 0px', threshold: 0.01 });
 
   try {
-    // Cache-bust files.json so changes show immediately
+    // Cache-bust files.json so updates show on first run
     const res = await fetch('files.json?' + Date.now(), { cache: 'no-store' });
     if (!res.ok) throw new Error('files.json missing');
     let files = await res.json();
@@ -77,7 +78,7 @@
       return;
     }
 
-    // Create empty figure shells (zero margins; line-height:0 to avoid hairlines)
+    // Create empty figure shells
     gallery.innerHTML = files.map(f =>
       `<figure class="item" data-id="${f.id}" data-rk="${f.rk || ''}" data-name="${(f.name||'').replace(/"/g,'&quot;')}"></figure>`
     ).join('');
