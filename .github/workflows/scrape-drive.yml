@@ -2,7 +2,7 @@ name: Scrape Google Drive (no API)
 
 on:
   schedule:
-    - cron: "0 */6 * * *"   # every 6 hours
+    - cron: "0 * * * *"        # every hour
   workflow_dispatch: {}
   push:
     paths:
@@ -10,7 +10,7 @@ on:
       - ".github/workflows/scrape-drive.yml"
 
 permissions:
-  contents: write   # allow commit/push of files.json
+  contents: write
 
 jobs:
   scrape:
@@ -25,20 +25,23 @@ jobs:
           node-version: "20"
 
       - name: Install deps
-        run: npm install puppeteer@22
+        run: npm install puppeteer@22 sharp@0.33.4
 
-      - name: Run scraper
+      - name: Run scraper (with color analysis)
         env:
           DRIVE_FOLDER_URL: ${{ secrets.DRIVE_FOLDER_URL }}
         run: node scrape.js "$DRIVE_FOLDER_URL"
 
-      - name: Commit files.json
+      - name: Touch timestamp (force redeploy)
+        run: echo "last_sync=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" > last_sync.txt
+
+      - name: Commit files
         run: |
-          if [[ -n "$(git status --porcelain files.json)" ]]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add files.json
-            git commit -m "Update files.json from Drive (scraped)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add files.json last_sync.txt
+          if ! git diff --cached --quiet; then
+            git commit -m "Update files.json (color buckets)"
             git push
           else
             echo "No changes."
