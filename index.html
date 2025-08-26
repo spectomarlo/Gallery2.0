@@ -11,66 +11,38 @@
   <link rel="dns-prefetch" href="//lh3.googleusercontent.com">
 
   <style>
-    :root { --maxw: 1600px; }
-
+    :root { --gap: 0; --maxw: 1600px; }
     * { box-sizing: border-box; }
     html, body { height: 100%; }
-    body {
-      margin: 0; background: #fff; color: #111;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
+    body { margin: 0; background: #fff; color: #111; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
 
-    /* Header */
     header.site-header { position: sticky; top: 0; z-index: 20; background: #fff; border-bottom: 1px solid #eee; }
     .header-inner { max-width: var(--maxw); margin: 0 auto; padding: 14px 12px; display: flex; align-items: center; }
     .site-title { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: .2px; }
 
-    /* Rivers layout */
-    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 12px 0 40px; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 16px 10px 60px; }
     .status { text-align:center; color:#666; padding:12px; }
 
-    .rivers { display: flex; flex-direction: column; gap: 0; }
-    .lane {
-      --lane-h: 180px;              /* JS will set this based on SCALE */
-      --dur: 80s;                   /* JS will randomize per lane */
-      height: var(--lane-h);
-      overflow: hidden;
-      line-height: 0;               /* prevents hairline gaps */
-      position: relative;
-      user-select: none;
+    /* Group header chip */
+    .group { margin: 20px 0 18px; }
+    .group .chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-weight: 700; font-size: 14px; letter-spacing: .2px;
+      padding: 6px 10px; border: 1px solid #eee; border-radius: 999px; background: #fafafa; color: #333;
     }
-    .lane .track {
-      display: flex;
-      width: max-content;
-      height: 100%;
-      animation: marqueeL var(--dur) linear infinite;
-      will-change: transform;
-    }
-    .lane.rev .track { animation-name: marqueeR; }
-    .lane .content {
-      display: flex;
-      height: 100%;
-    }
+    .chip .swatch { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,.1); }
 
-    .lane a {
-      display: block;
-      height: 100%;
-      text-decoration: none;
-      color: inherit;
-    }
-    .lane img {
-      display: block;
-      height: 100%;
-      width: auto;                  /* NO CROP: keep natural aspect ratio */
-      border: 0;
-      margin: 0;
-    }
+    /* Masonry, seamless (no crop) */
+    .masonry { column-gap: var(--gap); line-height: 0; }
+    figure.item { margin: 0; padding: 0; line-height: 0; break-inside: avoid; -webkit-column-break-inside: avoid; }
+    .item a { display: block; text-decoration: none; color: inherit; }
+    .item img { display: block; width: 100%; height: auto; border: 0; margin: 0; }
 
-    @keyframes marqueeL { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    @keyframes marqueeR { from { transform: translateX(-50%); } to { transform: translateX(0); } }
-
-    /* Responsive lane count (JS builds lanes; these just size the wrapper) */
-    @media (max-width: 479px){ .wrap { padding-left: 6px; padding-right: 6px; } }
+    /* Column counts (use your "3x smaller" look) */
+    @media (min-width: 360px){ .masonry { column-count: 6; } }
+    @media (min-width: 640px){ .masonry { column-count: 9; } }
+    @media (min-width: 900px){ .masonry { column-count: 12; } }
+    @media (min-width: 1200px){ .masonry { column-count: 15; } }
   </style>
 </head>
 <body>
@@ -82,10 +54,10 @@
 
   <main class="wrap">
     <div id="status" class="status">Loading images…</div>
-    <div id="rivers" class="rivers" hidden></div>
+    <div id="gallery"></div>
   </main>
 
-  <!-- bump v= when editing to bust cache -->
-  <script src="script.js?v=river1"></script>
+  <!-- bump v= to bust cache after edits -->
+  <script src="script.js?v=color1"></script>
 </body>
 </html>
