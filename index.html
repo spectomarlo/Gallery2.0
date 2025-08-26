@@ -29,24 +29,19 @@
     .btn:hover { background:#f2f2f2; }
     input[type="search"]{ padding:8px 10px; border:1px solid #ddd; border-radius:8px; min-width:200px; }
     .range { display:flex; gap:8px; align-items:center; }
-    .range input { width:140px; }
+    .range input[type="range"] { width:160px; }
+    .muted { color:#666; font-size:12px; }
 
     /* Page wrap */
     .wrap { max-width: var(--maxw); margin:0 auto; padding: 14px 10px 60px; }
     .status { text-align:center; color:#666; padding:12px; }
 
     /* Masonry (seamless, no-crop) */
-    .masonry { column-gap: var(--gap); line-height:0; }
+    .masonry { column-gap: var(--gap); line-height:0; column-width: var(--tileW, 200px); }
     figure.item { margin:0; padding:0; line-height:0; break-inside:avoid; -webkit-column-break-inside:avoid; opacity:0; transform:translateY(8px); transition:opacity .25s ease, transform .25s ease; }
     figure.item.reveal { opacity:1; transform:none; }
     .item a { display:block; text-decoration:none; color:inherit; }
     .item img { display:block; width:100%; height:auto; border:0; margin:0; }
-
-    /* Column counts (small tiles for density; tweak to taste) */
-    @media (min-width: 360px){ .masonry { column-count: 6; } }
-    @media (min-width: 640px){ .masonry { column-count: 9; } }
-    @media (min-width: 900px){ .masonry { column-count: 12; } }
-    @media (min-width:1200px){ .masonry { column-count: 15; } }
 
     /* River (auto-scrolling rows) */
     .rivers { display:flex; flex-direction:column; gap:0; }
@@ -56,14 +51,13 @@
     .lane .content { display:flex; height:100%; }
     .lane a { display:block; height:100%; }
     .lane img { display:block; height:100%; width:auto; border:0; }
-
     @keyframes marqueeL { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     @keyframes marqueeR { from { transform: translateX(-50%); } to { transform: translateX(0); } }
     .lane:hover .track { animation-play-state: paused; } /* pause on hover */
 
     /* Slideshow (full-viewport) */
     .slideshow { position:relative; min-height: calc(100vh - 120px); display:grid; place-items:center; }
-    .slide-img { max-width: 100%; max-height: calc(100vh - 180px); object-fit: contain; }
+    .slide-img { max-width: min(100%, var(--slide-max, 1200px)); max-height: min(calc(100vh - 180px), var(--slide-max, 1200px)); object-fit: contain; }
     .ss-controls { position:absolute; bottom:14px; left:50%; transform:translateX(-50%); display:flex; gap:8px; }
     .ss-btn { padding:8px 12px; border:1px solid #ddd; background:#fff; border-radius:8px; cursor:pointer; }
     .ss-btn:hover { background:#f7f7f7; }
@@ -84,13 +78,22 @@
           <button id="riverMode" role="tab">River</button>
           <button id="slideshowMode" role="tab">Slideshow</button>
         </div>
+
         <input id="q" type="search" placeholder="Search…" aria-label="Search images">
         <button id="shuffle" class="btn" type="button">Shuffle</button>
 
-        <!-- River-only controls -->
-        <div id="riverCtrls" class="range hidden">
-          <label for="size">Size</label><input id="size" type="range" min="0.8" max="1.6" step="0.05" value="1.20">
-          <label for="speed">Speed</label><input id="speed" type="range" min="40" max="120" step="5" value="80">
+        <!-- Size slider (ALL MODES) -->
+        <div id="sizeCtrls" class="range" title="Adjust size for the current mode">
+          <label for="size">Size</label>
+          <input id="size" type="range" min="10" max="2000" step="10" value="200">
+          <span id="sizeVal" class="muted">200px</span>
+        </div>
+
+        <!-- River-only speed -->
+        <div id="speedCtrls" class="range hidden">
+          <label for="speed">Speed</label>
+          <input id="speed" type="range" min="40" max="200" step="5" value="80">
+          <span id="speedVal" class="muted">80s</span>
         </div>
       </div>
     </div>
@@ -103,7 +106,7 @@
 
   <button id="toTop" class="to-top" type="button" title="Back to top">Top</button>
 
-  <!-- bump v= when you edit JS to bust cache -->
-  <script src="script.js?v=ui-modes1"></script>
+  <!-- bump v= to bust cache -->
+  <script src="script.js?v=mode-sizes2"></script>
 </body>
 </html>
