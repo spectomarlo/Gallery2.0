@@ -11,102 +11,81 @@
   <link rel="dns-prefetch" href="//lh3.googleusercontent.com">
 
   <style>
-    :root { --gap: 0; --maxw: 1600px; --accent: #111; }
+    :root { --maxw: 1600px; }
+
     * { box-sizing: border-box; }
     html, body { height: 100%; }
-    body { margin: 0; background: #fff; color: #111;
+    body {
+      margin: 0; background: #fff; color: #111;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
 
     /* Header */
     header.site-header { position: sticky; top: 0; z-index: 20; background: #fff; border-bottom: 1px solid #eee; }
-    .header-inner { max-width: var(--maxw); margin: 0 auto; padding: 14px 12px;
-      display: grid; gap: 10px; grid-template-columns: 1fr auto;
-      align-items: center;
-    }
+    .header-inner { max-width: var(--maxw); margin: 0 auto; padding: 14px 12px; display: flex; align-items: center; }
     .site-title { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: .2px; }
-    .controls { display: flex; gap: 8px; flex-wrap: wrap; }
-    .controls input[type="search"]{
-      padding: 8px 10px; border: 1px solid #ddd; border-radius: 8px; min-width: 220px;
-    }
-    .btn { padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; background:#fafafa; cursor: pointer; }
-    .btn:hover { background: #f2f2f2; }
 
-    /* Page wrap */
-    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 16px 10px 60px; }
-
-    /* Masonry (seamless, no crop) */
-    .masonry { column-gap: var(--gap); line-height: 0; }
-    figure.item { margin: 0; padding: 0; line-height: 0;
-      break-inside: avoid; -webkit-column-break-inside: avoid; -moz-column-break-inside: avoid; -ms-break-inside: avoid;
-      opacity: 0; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease;  /* reveal */
-    }
-    figure.item.reveal { opacity: 1; transform: none; }
-    .item a { display:block; text-decoration: none; color: inherit; }
-    .item img { display: block; width: 100%; height: auto; border: 0; margin: 0; }
-
-    /* Column counts (keeps your “3x smaller” look) */
-    @media (min-width: 360px){ .masonry { column-count: 6; } }
-    @media (min-width: 640px){ .masonry { column-count: 9; } }
-    @media (min-width: 900px){ .masonry { column-count: 12; } }
-    @media (min-width: 1200px){ .masonry { column-count: 15; } }
-
+    /* Rivers layout */
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 12px 0 40px; }
     .status { text-align:center; color:#666; padding:12px; }
 
-    /* Lightbox */
-    .lightbox {
-      position: fixed; inset: 0; background: rgba(0,0,0,.92);
-      display: grid; grid-template-columns: 64px 1fr 64px; grid-template-rows: 64px 1fr 64px;
-      opacity: 0; pointer-events: none; transition: opacity .2s ease;
-      z-index: 50;
+    .rivers { display: flex; flex-direction: column; gap: 0; }
+    .lane {
+      --lane-h: 180px;              /* JS will set this based on SCALE */
+      --dur: 80s;                   /* JS will randomize per lane */
+      height: var(--lane-h);
+      overflow: hidden;
+      line-height: 0;               /* prevents hairline gaps */
+      position: relative;
+      user-select: none;
     }
-    .lightbox.open { opacity: 1; pointer-events: auto; }
-    .lb-btn { color:#fff; background: transparent; border: none; font-size: 32px; cursor: pointer; }
-    .lb-btn:hover { opacity: .85; }
-    #lbClose { grid-area: 1 / 3; justify-self: end; align-self: start; padding: 16px; }
-    #lbPrev { grid-area: 2 / 1; align-self: center; }
-    #lbNext { grid-area: 2 / 3; align-self: center; }
-    .lb-stage { grid-area: 2 / 2; display: grid; place-items: center; padding: 16px; }
-    .lb-stage img { max-width: 100%; max-height: 100%; object-fit: contain; }
-    .lb-caption { grid-area: 3 / 2; color: #ddd; text-align: center; font-size: 14px; letter-spacing:.2px; }
+    .lane .track {
+      display: flex;
+      width: max-content;
+      height: 100%;
+      animation: marqueeL var(--dur) linear infinite;
+      will-change: transform;
+    }
+    .lane.rev .track { animation-name: marqueeR; }
+    .lane .content {
+      display: flex;
+      height: 100%;
+    }
 
-    /* Back-to-top */
-    .to-top {
-      position: fixed; right: 14px; bottom: 14px; z-index: 30;
-      background: #fff; color: var(--accent); border: 1px solid #ddd; border-radius: 999px;
-      padding: 8px 12px; font-weight: 600; cursor: pointer; box-shadow: 0 6px 16px rgba(0,0,0,.05);
+    .lane a {
+      display: block;
+      height: 100%;
+      text-decoration: none;
+      color: inherit;
     }
-    .to-top:hover { background:#f7f7f7; }
+    .lane img {
+      display: block;
+      height: 100%;
+      width: auto;                  /* NO CROP: keep natural aspect ratio */
+      border: 0;
+      margin: 0;
+    }
+
+    @keyframes marqueeL { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes marqueeR { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+    /* Responsive lane count (JS builds lanes; these just size the wrapper) */
+    @media (max-width: 479px){ .wrap { padding-left: 6px; padding-right: 6px; } }
   </style>
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
       <h1 class="site-title">Gemini Generated Muse Portfolio</h1>
-      <div class="controls">
-        <input id="q" type="search" placeholder="Search by name…" aria-label="Search images">
-        <button id="shuffle" class="btn" type="button">Shuffle</button>
-      </div>
     </div>
   </header>
 
   <main class="wrap">
     <div id="status" class="status">Loading images…</div>
-    <div id="gallery" class="masonry" hidden></div>
+    <div id="rivers" class="rivers" hidden></div>
   </main>
 
-  <!-- Lightbox -->
-  <div id="lightbox" class="lightbox" aria-hidden="true">
-    <button id="lbClose" class="lb-btn" title="Close">×</button>
-    <button id="lbPrev" class="lb-btn" title="Previous">‹</button>
-    <div class="lb-stage"><img id="lbImg" alt=""></div>
-    <button id="lbNext" class="lb-btn" title="Next">›</button>
-    <div id="lbCaption" class="lb-caption"></div>
-  </div>
-
-  <button id="toTop" class="to-top" type="button" title="Back to top">Top</button>
-
-  <!-- bump v= when you edit JS to bust cache -->
-  <script src="script.js?v=7"></script>
+  <!-- bump v= when editing to bust cache -->
+  <script src="script.js?v=river1"></script>
 </body>
 </html>
