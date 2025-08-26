@@ -1,188 +1,144 @@
-// Interactive pack: search + shuffle + scroll reveal + lightbox + back-to-top
+// Auto-scrolling "river" layout (alternating directions), ~1.25x bigger tiles, no crop.
 (async () => {
   const status  = document.getElementById('status');
-  const gallery = document.getElementById('gallery');
-  const q       = document.getElementById('q');
-  const shuffleBtn = document.getElementById('shuffle');
+  const rivers  = document.getElementById('rivers');
 
-  // Lightbox elements
-  const lb      = document.getElementById('lightbox');
-  const lbImg   = document.getElementById('lbImg');
-  const lbCap   = document.getElementById('lbCaption');
-  const lbClose = document.getElementById('lbClose');
-  const lbPrev  = document.getElementById('lbPrev');
-  const lbNext  = document.getElementById('lbNext');
-
-  const toTop   = document.getElementById('toTop');
-
+  /* ====== TWEAKS ====== */
+  const SCALE = 1.25;          // <- 1.x bigger. Try 1.10 (a bit bigger) or 1.40 (much bigger)
+  const BASE_LANE_H = 140;     // px. Final lane height = BASE_LANE_H * SCALE.
+  const MIN_LANES = 3, MAX_LANES = 6; // lanes by viewport width (computed below)
+  const SPEED_RANGE = [55, 110]; // seconds per cycle (randomized per lane)
   const IMG_EXT_RE = /\.(jpe?g|png|gif|webp|bmp|avif)$/i;
+  /* ===================== */
 
   const withRK = (base, id, rk, extra='') =>
     `${base}${base.includes('?') ? '&' : '?'}${extra ? extra + '&' : ''}id=${encodeURIComponent(id)}${rk ? `&resourcekey=${encodeURIComponent(rk)}` : ''}`;
 
-  // URLs
-  const thumbUrl = (id, rk, w=400) => withRK('https://drive.google.com/thumbnail', id, rk, `sz=w${w}`);
+  const thumbUrl = (id, rk, w=600) => withRK('https://drive.google.com/thumbnail', id, rk, `sz=w${w}`);
   const viewUrl  = (id, rk)        => withRK('https://drive.google.com/uc?export=view', id, rk);
-  const gucUrl   = (id, w=2500)    => `https://lh3.googleusercontent.com/d/${id}=w${w}`;
+  const gucUrl   = (id, w=2000)    => `https://lh3.googleusercontent.com/d/${id}=w${w}`;
 
-  // Global state
-  let files = [];
-  let view  = [];   // filtered & ordered
-  let current = -1;
+  const laneHeight = Math.round(BASE_LANE_H * SCALE);
+  const laneCount = (() => {
+    const w = window.innerWidth;
+    if (w < 500) return Math.max(MIN_LANES, 3);
+    if (w < 900) return Math.min(MAX_LANES, 4);
+    if (w < 1400) return Math.min(MAX_LANES, 5);
+    return MAX_LANES;
+  })();
 
-  // Helpers
-  const rand = (n) => Math.floor(Math.random() * n);
-  const shuffle = (arr) => {
-    const a = arr.slice();
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = rand(i + 1); [a[i], a[j]] = [a[j], a[i]];
-    }
+  // Build one <a><img></a> for a file
+  function makeTile(f, desiredW = 800) {
+    const a = document.createElement('a');
+    a.href = viewUrl(f.id, f.rk || '');
+
+    const img = new Image();
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.fetchPriority = 'low';
+    img.referrerPolicy = 'no-referrer';
+    img.alt = f.name || '';
+
+    // Responsive thumbs – lane height is fixed; width varies by aspect ratio
+    const w1 = Math.max(300, Math.round(desiredW * 0.5));
+    const w2 = Math.max(500, desiredW);
+    const w3 = Math.round(desiredW * 1.5);
+    img.src = thumbUrl(f.id, f.rk, w2);
+    img.srcset = [
+      `${thumbUrl(f.id, f.rk, w1)} ${w1}w`,
+      `${thumbUrl(f.id, f.rk, w2)} ${w2}w`,
+      `${thumbUrl(f.id, f.rk, w3)} ${w3}w`
+    ].join(', ');
+    img.sizes = `${Math.ceil( (desiredW / window.innerWidth) * 100 )}vw`;
+
+    img.onerror = () => {
+      if (img.dataset.fail === '1') {
+        img.src = gucUrl(f.id, 2000);
+        img.removeAttribute('srcset');
+        img.removeAttribute('sizes');
+      } else if (img.dataset.fail === '2') {
+        img.src = viewUrl(f.id, f.rk || '');
+      } else {
+        img.dataset.fail = String((Number(img.dataset.fail||0) + 1));
+        img.src = thumbUrl(f.id, f.rk, w1);
+      }
+    };
+
+    a.appendChild(img);
     return a;
-  };
+  }
 
-  // Build gallery shells + lazy attach
-  const observer = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-      if (!entry.isIntersecting) continue;
-      const fig = entry.target;
-      observer.unobserve(fig);
+  function randBetween(min, max) {
+    return Math.random() * (max - min) + min;
+  }
 
-      const idx = +fig.dataset.index;
-      const it  = view[idx];
+  // Build the rivers
+  function buildRivers(files) {
+    rivers.innerHTML = '';
+    document.documentElement.style.setProperty('--lane-h', laneHeight + 'px');
 
-      // Reveal animation
-      requestAnimationFrame(() => fig.classList.add('reveal'));
+    // Make lanes
+    const lanes = Array.from({ length: laneCount }, (_, i) => {
+      const lane = document.createElement('section');
+      lane.className = 'lane' + (i % 2 ? ' rev' : '');
+      // Randomize speed per lane (parallax feel)
+      const dur = randBetween(SPEED_RANGE[0], SPEED_RANGE[1]).toFixed(2) + 's';
+      lane.style.setProperty('--dur', dur);
 
-      // Anchor around image (default same-tab link if user opens in new tab)
-      const a = document.createElement('a');
-      a.href = viewUrl(it.id, it.rk || '');
+      const track = document.createElement('div');
+      track.className = 'track';
 
-      const img = new Image();
-      img.loading = 'lazy';
-      img.decoding = 'async';
-      img.fetchPriority = 'low';
-      img.referrerPolicy = 'no-referrer';
-      img.alt = it.name || '';
+      // Primary content
+      const content = document.createElement('div');
+      content.className = 'content';
 
-      // Responsive thumbs (very small tiles now)
-      const w1 = 200, w2 = 400, w3 = 800;
-      img.src = thumbUrl(it.id, it.rk, w2);
-      img.srcset = [
-        `${thumbUrl(it.id, it.rk, w1)} ${w1}w`,
-        `${thumbUrl(it.id, it.rk, w2)} ${w2}w`,
-        `${thumbUrl(it.id, it.rk, w3)} ${w3}w`
-      ].join(', ');
-      img.sizes = '(min-width:1200px) 6.7vw, (min-width:900px) 8.3vw, (min-width:640px) 11.1vw, (min-width:360px) 16.7vw, 33vw';
+      // Distribute images round-robin
+      for (let j = i; j < files.length; j += laneCount) {
+        content.appendChild( makeTile(files[j]) );
+      }
 
-      // Fallbacks
-      img.onerror = () => {
-        if (img.dataset.fail === '1') {
-          img.src = gucUrl(it.id);
-          img.removeAttribute('srcset');
-          img.removeAttribute('sizes');
-        } else if (img.dataset.fail === '2') {
-          img.src = viewUrl(it.id, it.rk || '');
-        } else {
-          img.dataset.fail = String((Number(img.dataset.fail||0) + 1));
-          img.src = thumbUrl(it.id, it.rk, w1);
-        }
-      };
+      // Duplicate once for seamless loop
+      const clone = content.cloneNode(true);
 
-      a.appendChild(img);
-      fig.appendChild(a);
-    }
-  }, { root: null, rootMargin: '600px 0px', threshold: 0.01 });
+      track.appendChild(content);
+      track.appendChild(clone);
+      lane.appendChild(track);
+      rivers.appendChild(lane);
 
-  function buildGallery() {
-    // Build figure shells only (fast)
-    gallery.innerHTML = view.map((f, i) =>
-      `<figure class="item" data-index="${i}" data-id="${f.id}" data-rk="${f.rk || ''}" data-name="${(f.name||'').replace(/"/g,'&quot;')}"></figure>`
-    ).join('');
-    // Observe all
-    gallery.querySelectorAll('figure.item').forEach(fig => observer.observe(fig));
+      return lane;
+    });
+
     status.hidden = true;
-    gallery.hidden = false;
+    rivers.hidden = false;
   }
 
-  // Search filter (by filename)
-  function applyFilter(term) {
-    const t = (term || '').trim().toLowerCase();
-    if (!t) { view = files.slice(); return; }
-    view = files.filter(f => (f.name || '').toLowerCase().includes(t));
-  }
-
-  // Lightbox
-  function openLightbox(i) {
-    if (i < 0 || i >= view.length) return;
-    current = i;
-    const it = view[i];
-    lbImg.src = ''; // clear first
-    lbImg.alt = it.name || '';
-    lbCap.textContent = it.name || '';
-    // Prefer direct img; fallback to view URL
-    const try1 = gucUrl(it.id, 3000);
-    const try2 = viewUrl(it.id, it.rk || '');
-    lbImg.onerror = () => { if (lbImg.src !== try2) lbImg.src = try2; };
-    lbImg.src = try1;
-
-    lb.classList.add('open');
-    lb.setAttribute('aria-hidden', 'false');
-    document.documentElement.style.overflow = 'hidden'; // lock scroll
-    // Preload neighbor
-    const n = new Image(); const j = Math.min(view.length - 1, i + 1);
-    n.src = gucUrl(view[j].id, 2000);
-  }
-  function closeLightbox() {
-    lb.classList.remove('open');
-    lb.setAttribute('aria-hidden', 'true');
-    document.documentElement.style.overflow = '';
-    current = -1;
-  }
-  function next() { if (current >= 0) openLightbox((current + 1) % view.length); }
-  function prev() { if (current >= 0) openLightbox((current - 1 + view.length) % view.length); }
-
-  // Event delegation: click tile -> lightbox (unless meta/ctrl for new tab)
-  gallery.addEventListener('click', (e) => {
-    const a = e.target.closest('a');
-    if (!a) return;
-    if (e.metaKey || e.ctrlKey || e.shiftKey) return; // let user open new tab if they want
-    e.preventDefault();
-    const fig = e.target.closest('figure.item');
-    if (!fig) return;
-    openLightbox(+fig.dataset.index);
-  });
-
-  // Lightbox controls
-  lbClose.addEventListener('click', closeLightbox);
-  lbNext.addEventListener('click', next);
-  lbPrev.addEventListener('click', prev);
-  lb.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
-  window.addEventListener('keydown', (e) => {
-    if (!lb.classList.contains('open')) return;
-    if (e.key === 'Escape') closeLightbox();
-    else if (e.key === 'ArrowRight') next();
-    else if (e.key === 'ArrowLeft') prev();
-  });
-
-  // Search & Shuffle
-  q.addEventListener('input', () => { applyFilter(q.value); buildGallery(); });
-  shuffleBtn.addEventListener('click', () => { view = shuffle(view.length ? view : files); buildGallery(); });
-
-  // Back to top
-  toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  // Optionally rebuild on resize (debounced)
+  let rAF = 0;
+  const onResize = () => {
+    cancelAnimationFrame(rAF);
+    rAF = requestAnimationFrame(() => {
+      // Soft refresh: just update sizes attribute of images (avoid full rebuild)
+      document.querySelectorAll('.lane img').forEach(img => {
+        const wAttr = img.getAttribute('srcset')?.split(' ')[1] || '600w';
+        const approxW = parseInt(wAttr) || 600;
+        img.sizes = `${Math.ceil( (approxW / window.innerWidth) * 100 )}vw`;
+      });
+    });
+  };
+  window.addEventListener('resize', onResize);
 
   try {
-    // Cache-bust files.json so updates show immediately
     const res = await fetch('files.json?' + Date.now(), { cache: 'no-store' });
     if (!res.ok) throw new Error('files.json missing');
-    const raw = await res.json();
+    let files = await res.json();
 
-    files = (Array.isArray(raw) ? raw : []).filter(f => IMG_EXT_RE.test(f.name || ''));
-    view = files.slice();
+    files = (Array.isArray(files) ? files : []).filter(f => IMG_EXT_RE.test(f.name || ''));
+    if (!files.length) {
+      status.textContent = 'No images found (check sharing and file types).';
+      return;
+    }
 
-    if (!view.length) { status.textContent = 'No images found (check sharing and file types).'; return; }
-
-    buildGallery();
+    buildRivers(files);
   } catch (e) {
     console.error(e);
     status.textContent = 'Error loading gallery.';
