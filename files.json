@@ -1,15 +1,5 @@
 [
   {
-    "id": "1glNunO4veJ1LHEXzH0stOTNldcMEuL-F",
-    "name": "0bacced4-d53d-474d-961b-a1a89528b30d.png",
-    "rk": "",
-    "hex": "#e3a5a7",
-    "h": 358.06451612903226,
-    "s": 0.5254237288135591,
-    "l": 0.7686274509803921,
-    "bucket": "Red"
-  },
-  {
     "id": "1NsBweP5RpD8aUOs3BkUTZ909phG5usjn",
     "name": "12dsd.png",
     "rk": "",
@@ -2698,6 +2688,16 @@
     "s": 0.23577235772357721,
     "l": 0.5176470588235293,
     "bucket": "Brown"
+  },
+  {
+    "id": "1glNunO4veJ1LHEXzH0stOTNldcMEuL-F",
+    "name": "0bacced4-d53d-474d-961b-a1a89528b30d.png",
+    "rk": "",
+    "hex": "#888888",
+    "h": 0,
+    "s": 0,
+    "l": 0.5,
+    "bucket": "Grayscale"
   },
   {
     "id": "1RrIEA_tQ5LN7hfDJqchY5Mkn141N8pGy",
