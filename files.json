@@ -1130,16 +1130,6 @@
     "bucket": "Orange"
   },
   {
-    "id": "191SIun4dCdMyf9ffzXDSbazJRkiFq4HQ",
-    "name": "cc44f18f-7c23-420c-9069-de5da5f5a2c3.png",
-    "rk": "",
-    "hex": "#d7baaa",
-    "h": 21.33333333333333,
-    "s": 0.36000000000000015,
-    "l": 0.7549019607843137,
-    "bucket": "Orange"
-  },
-  {
     "id": "1jhjzKOQhqfbpr-kb1F9fdqzAV77wGs5a",
     "name": "ce1e6e8d-f728-465a-a044-4cc8a58b14eb.png",
     "rk": "",
@@ -2280,16 +2270,6 @@
     "bucket": "Brown"
   },
   {
-    "id": "1mmqVL5EqT7h9Sqo2nC4L_iXRaVLswbft",
-    "name": "f2c115a3-1138-4518-9258-fa5631aa4cf7.png",
-    "rk": "",
-    "hex": "#a17f64",
-    "h": 26.557377049180335,
-    "s": 0.24497991967871482,
-    "l": 0.5117647058823529,
-    "bucket": "Brown"
-  },
-  {
     "id": "15GxWie-OIqMhLbx2FnRWXaf9PY30a3kn",
     "name": "fdbebrt.png",
     "rk": "",
@@ -2747,6 +2727,26 @@
     "h": 214.2857142857143,
     "s": 0.06194690265486723,
     "l": 0.22156862745098038,
+    "bucket": "Grayscale"
+  },
+  {
+    "id": "191SIun4dCdMyf9ffzXDSbazJRkiFq4HQ",
+    "name": "cc44f18f-7c23-420c-9069-de5da5f5a2c3.png",
+    "rk": "",
+    "hex": "#888888",
+    "h": 0,
+    "s": 0,
+    "l": 0.5,
+    "bucket": "Grayscale"
+  },
+  {
+    "id": "1mmqVL5EqT7h9Sqo2nC4L_iXRaVLswbft",
+    "name": "f2c115a3-1138-4518-9258-fa5631aa4cf7.png",
+    "rk": "",
+    "hex": "#888888",
+    "h": 0,
+    "s": 0,
+    "l": 0.5,
     "bucket": "Grayscale"
   },
   {
