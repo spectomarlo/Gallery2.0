@@ -2120,6 +2120,16 @@
     "bucket": "Brown"
   },
   {
+    "id": "1L8XcpN7RL_LDmOJXCU9kl2joj1F4Jqba",
+    "name": "d7e0ea3e-9069-4770-819b-5f35c5b96a0f.png",
+    "rk": "",
+    "hex": "#423128",
+    "h": 20.769230769230774,
+    "s": 0.24528301886792458,
+    "l": 0.20784313725490197,
+    "bucket": "Brown"
+  },
+  {
     "id": "1N7JGyMT8WGEdsdO8mNJErj983r1N6yrK",
     "name": "dfvea.png",
     "rk": "",
@@ -2737,16 +2747,6 @@
     "h": 214.2857142857143,
     "s": 0.06194690265486723,
     "l": 0.22156862745098038,
-    "bucket": "Grayscale"
-  },
-  {
-    "id": "1L8XcpN7RL_LDmOJXCU9kl2joj1F4Jqba",
-    "name": "d7e0ea3e-9069-4770-819b-5f35c5b96a0f.png",
-    "rk": "",
-    "hex": "#888888",
-    "h": 0,
-    "s": 0,
-    "l": 0.5,
     "bucket": "Grayscale"
   },
   {
