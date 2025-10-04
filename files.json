@@ -2813,10 +2813,10 @@
     "id": "1QbMlL02EE_euzw3fLpuvS00f3JIs0pYh",
     "name": "sadac.png",
     "rk": "",
-    "hex": "#888888",
-    "h": 0,
-    "s": 0,
-    "l": 0.5,
+    "hex": "#3e383e",
+    "h": 300,
+    "s": 0.05084745762711864,
+    "l": 0.23137254901960785,
     "bucket": "Grayscale"
   },
   {
