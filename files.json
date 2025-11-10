@@ -600,16 +600,6 @@
     "bucket": "Orange"
   },
   {
-    "id": "1zayTZhJNPstWn3KYrAcvJkFkFpvmehVR",
-    "name": "67d84dfe-dddf-4cd7-9f8a-3ae05991e2ba.png",
-    "rk": "",
-    "hex": "#c9aa8f",
-    "h": 27.931034482758612,
-    "s": 0.3493975903614457,
-    "l": 0.6745098039215687,
-    "bucket": "Orange"
-  },
-  {
     "id": "1wE1R2IATcNaDvwPjkXx_kf0dP-KKs9ds",
     "name": "72f6ff8a-e775-4aee-84db-6c40d5ca6d72.png",
     "rk": "",
@@ -1690,16 +1680,6 @@
     "bucket": "Orange"
   },
   {
-    "id": "1HvSEGgTAJg3t7UgXF3qBhfb8W9pBo_X0",
-    "name": "yufmm.png",
-    "rk": "",
-    "hex": "#aa8972",
-    "h": 24.64285714285714,
-    "s": 0.2477876106194689,
-    "l": 0.5568627450980392,
-    "bucket": "Orange"
-  },
-  {
     "id": "1oYmabWJA6LhgAMTAX70-_-w4FqzEn3LV",
     "name": "kjkh.png",
     "rk": "",
@@ -2490,16 +2470,6 @@
     "bucket": "Brown"
   },
   {
-    "id": "1wcAGzneo8ukn7FOFg8DGyTpZaQzauTPw",
-    "name": "rtbtb.png",
-    "rk": "",
-    "hex": "#765b47",
-    "h": 25.531914893617017,
-    "s": 0.2486772486772487,
-    "l": 0.37058823529411766,
-    "bucket": "Brown"
-  },
-  {
     "id": "1BoFO9aVVVx4I5_tIo8taQQOccWAFqbLC",
     "name": "rtrt.png",
     "rk": "",
@@ -2710,6 +2680,16 @@
     "bucket": "Grayscale"
   },
   {
+    "id": "1zayTZhJNPstWn3KYrAcvJkFkFpvmehVR",
+    "name": "67d84dfe-dddf-4cd7-9f8a-3ae05991e2ba.png",
+    "rk": "",
+    "hex": "#888888",
+    "h": 0,
+    "s": 0,
+    "l": 0.5,
+    "bucket": "Grayscale"
+  },
+  {
     "id": "1OJl0Hl8y9rCJYuxTcENHqXKZ6KT8-Bv1",
     "name": "444.png",
     "rk": "",
@@ -2800,13 +2780,23 @@
     "bucket": "Grayscale"
   },
   {
+    "id": "1wcAGzneo8ukn7FOFg8DGyTpZaQzauTPw",
+    "name": "rtbtb.png",
+    "rk": "",
+    "hex": "#888888",
+    "h": 0,
+    "s": 0,
+    "l": 0.5,
+    "bucket": "Grayscale"
+  },
+  {
     "id": "13hjEogMp3STG9RrQLpuOjbJRG2s7cH8Z",
     "name": "rwefvb.png",
     "rk": "",
-    "hex": "#897f7e",
-    "h": 5.454545454545441,
-    "s": 0.044534412955465535,
-    "l": 0.5156862745098039,
+    "hex": "#888888",
+    "h": 0,
+    "s": 0,
+    "l": 0.5,
     "bucket": "Grayscale"
   },
   {
@@ -2867,6 +2857,16 @@
     "h": 5.999999999999983,
     "s": 0.09090909090909086,
     "l": 0.5686274509803921,
+    "bucket": "Grayscale"
+  },
+  {
+    "id": "1HvSEGgTAJg3t7UgXF3qBhfb8W9pBo_X0",
+    "name": "yufmm.png",
+    "rk": "",
+    "hex": "#888888",
+    "h": 0,
+    "s": 0,
+    "l": 0.5,
     "bucket": "Grayscale"
   }
 ]
