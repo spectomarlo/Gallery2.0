@@ -230,16 +230,6 @@
     "bucket": "Red"
   },
   {
-    "id": "1YC4XLmLV1Px_wrd3tLt3Eb97Kw3GvPf3",
-    "name": "nrtsnt.png",
-    "rk": "",
-    "hex": "#93646c",
-    "h": 349.78723404255317,
-    "s": 0.19028340080971656,
-    "l": 0.484313725490196,
-    "bucket": "Red"
-  },
-  {
     "id": "1hDg8H-yJw2GtwPc3yn3uB-pYVDKMaqiQ",
     "name": "q.png",
     "rk": "",
@@ -1297,16 +1287,6 @@
     "h": 24.23076923076922,
     "s": 0.32499999999999984,
     "l": 0.6862745098039216,
-    "bucket": "Orange"
-  },
-  {
-    "id": "1kI_QlSoxY4ewLt6ANaBMa0FkMlikxk9U",
-    "name": "easthrdt.png",
-    "rk": "",
-    "hex": "#c4a491",
-    "h": 22.3529411764706,
-    "s": 0.3017751479289941,
-    "l": 0.6686274509803922,
     "bucket": "Orange"
   },
   {
@@ -2750,6 +2730,16 @@
     "bucket": "Grayscale"
   },
   {
+    "id": "1kI_QlSoxY4ewLt6ANaBMa0FkMlikxk9U",
+    "name": "easthrdt.png",
+    "rk": "",
+    "hex": "#888888",
+    "h": 0,
+    "s": 0,
+    "l": 0.5,
+    "bucket": "Grayscale"
+  },
+  {
     "id": "1hYl2Zg6DdpmLDg8fdDafvkeksT_giHNQ",
     "name": "fgfdfd.png",
     "rk": "",
@@ -2797,6 +2787,16 @@
     "h": 90,
     "s": 0.017699115044247725,
     "l": 0.5568627450980392,
+    "bucket": "Grayscale"
+  },
+  {
+    "id": "1YC4XLmLV1Px_wrd3tLt3Eb97Kw3GvPf3",
+    "name": "nrtsnt.png",
+    "rk": "",
+    "hex": "#888888",
+    "h": 0,
+    "s": 0,
+    "l": 0.5,
     "bucket": "Grayscale"
   },
   {
