@@ -370,6 +370,16 @@
     "bucket": "Red"
   },
   {
+    "id": "1q3wevAC9RtQyqWEnUSx7GkF0iUmuaY-W",
+    "name": ",uu,t.png",
+    "rk": "",
+    "hex": "#a88977",
+    "h": 22.040816326530607,
+    "s": 0.21973094170403581,
+    "l": 0.5627450980392157,
+    "bucket": "Orange"
+  },
+  {
     "id": "1B0yqJ6rGIQ_1iJe95pSYkz4kPwL9salE",
     "name": "0b5401b7-e524-42f3-83ea-36512df6347e.png",
     "rk": "",
@@ -467,6 +477,16 @@
     "h": 24.545454545454536,
     "s": 0.3749999999999999,
     "l": 0.6549019607843137,
+    "bucket": "Orange"
+  },
+  {
+    "id": "12dXL27EPADm_yUh-QaAJlxf-YFi-JU_M",
+    "name": "06d274f7-163b-4677-9561-381180343292.png",
+    "rk": "",
+    "hex": "#b99073",
+    "h": 24.857142857142854,
+    "s": 0.3333333333333333,
+    "l": 0.5882352941176471,
     "bucket": "Orange"
   },
   {
@@ -827,6 +847,16 @@
     "h": 21.904761904761898,
     "s": 0.3165829145728643,
     "l": 0.6098039215686274,
+    "bucket": "Orange"
+  },
+  {
+    "id": "1spV62jBDTBZaikLq8AXfSmVTOD8gUxYL",
+    "name": "055412a3-df20-4177-af08-16e9e98f4ac1.png",
+    "rk": "",
+    "hex": "#d6bead",
+    "h": 24.878048780487802,
+    "s": 0.3333333333333334,
+    "l": 0.7588235294117647,
     "bucket": "Orange"
   },
   {
@@ -2670,16 +2700,6 @@
     "bucket": "Brown"
   },
   {
-    "id": "1q3wevAC9RtQyqWEnUSx7GkF0iUmuaY-W",
-    "name": ",uu,t.png",
-    "rk": "",
-    "hex": "#888888",
-    "h": 0,
-    "s": 0,
-    "l": 0.5,
-    "bucket": "Grayscale"
-  },
-  {
     "id": "1RrIEA_tQ5LN7hfDJqchY5Mkn141N8pGy",
     "name": "1efvbrb.png",
     "rk": "",
@@ -2687,16 +2707,6 @@
     "h": 12.857142857142867,
     "s": 0.060869565217391335,
     "l": 0.45098039215686275,
-    "bucket": "Grayscale"
-  },
-  {
-    "id": "12dXL27EPADm_yUh-QaAJlxf-YFi-JU_M",
-    "name": "06d274f7-163b-4677-9561-381180343292.png",
-    "rk": "",
-    "hex": "#888888",
-    "h": 0,
-    "s": 0,
-    "l": 0.5,
     "bucket": "Grayscale"
   },
   {
@@ -2717,16 +2727,6 @@
     "h": 74.1176470588236,
     "s": 0.08808290155440411,
     "l": 0.6215686274509804,
-    "bucket": "Grayscale"
-  },
-  {
-    "id": "1spV62jBDTBZaikLq8AXfSmVTOD8gUxYL",
-    "name": "055412a3-df20-4177-af08-16e9e98f4ac1.png",
-    "rk": "",
-    "hex": "#888888",
-    "h": 0,
-    "s": 0,
-    "l": 0.5,
     "bucket": "Grayscale"
   },
   {
