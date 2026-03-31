@@ -2580,6 +2580,16 @@
     "bucket": "Brown"
   },
   {
+    "id": "146yR9oc4iUKY6wvO6fXoEK8T4N8qXrhT",
+    "name": "tennyn.png",
+    "rk": "",
+    "hex": "#a48960",
+    "h": 36.17647058823528,
+    "s": 0.272,
+    "l": 0.5098039215686274,
+    "bucket": "Brown"
+  },
+  {
     "id": "14tTucmUnyEcz7l1UIOKYw_FTNNw_SvOq",
     "name": "teyn.png",
     "rk": "",
@@ -2817,16 +2827,6 @@
     "h": 341.53846153846155,
     "s": 0.05306122448979591,
     "l": 0.48039215686274506,
-    "bucket": "Grayscale"
-  },
-  {
-    "id": "146yR9oc4iUKY6wvO6fXoEK8T4N8qXrhT",
-    "name": "tennyn.png",
-    "rk": "",
-    "hex": "#888888",
-    "h": 0,
-    "s": 0,
-    "l": 0.5,
     "bucket": "Grayscale"
   },
   {
