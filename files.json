@@ -1440,16 +1440,6 @@
     "bucket": "Orange"
   },
   {
-    "id": "11A713S8G7uwowxlNgXevm7M-fmh2ipSO",
-    "name": "gfgsgea.png",
-    "rk": "",
-    "hex": "#b59c89",
-    "h": 25.909090909090928,
-    "s": 0.22916666666666677,
-    "l": 0.6235294117647059,
-    "bucket": "Orange"
-  },
-  {
     "id": "13qXXQqEech8ycaQJFafWt3R4-n75uk58",
     "name": "grsvrtv.png",
     "rk": "",
@@ -2767,6 +2757,16 @@
     "h": 39.000000000000064,
     "s": 0.08474576271186435,
     "l": 0.5372549019607843,
+    "bucket": "Grayscale"
+  },
+  {
+    "id": "11A713S8G7uwowxlNgXevm7M-fmh2ipSO",
+    "name": "gfgsgea.png",
+    "rk": "",
+    "hex": "#888888",
+    "h": 0,
+    "s": 0,
+    "l": 0.5,
     "bucket": "Grayscale"
   },
   {
