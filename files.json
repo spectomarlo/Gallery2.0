@@ -70,16 +70,6 @@
     "bucket": "Red"
   },
   {
-    "id": "1h2c_wahxp9yuveVbf480evo17F_izGe-",
-    "name": "121212.png",
-    "rk": "",
-    "hex": "#ba8378",
-    "h": 9.999999999999991,
-    "s": 0.32352941176470584,
-    "l": 0.6,
-    "bucket": "Red"
-  },
-  {
     "id": "1sdkINiCu0NEMhRtfUZp0ZpIdNg-vpKW-",
     "name": "112121222.png",
     "rk": "",
@@ -2737,6 +2727,16 @@
     "h": 112.50000000000003,
     "s": 0.06779661016949153,
     "l": 0.5372549019607843,
+    "bucket": "Grayscale"
+  },
+  {
+    "id": "1h2c_wahxp9yuveVbf480evo17F_izGe-",
+    "name": "121212.png",
+    "rk": "",
+    "hex": "#888888",
+    "h": 0,
+    "s": 0,
+    "l": 0.5,
     "bucket": "Grayscale"
   },
   {
