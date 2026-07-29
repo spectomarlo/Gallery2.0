@@ -950,6 +950,16 @@
     "bucket": "Orange"
   },
   {
+    "id": "1vCrkzJsjARcRJZXbZsli2bUDB4eNLEZf",
+    "name": "a54078fe-ecfd-4e4e-a179-a45d62942f72.png",
+    "rk": "",
+    "hex": "#c99c7f",
+    "h": 23.513513513513523,
+    "s": 0.4065934065934065,
+    "l": 0.6431372549019607,
+    "bucket": "Orange"
+  },
+  {
     "id": "18HnbCAlrfHdn9c0WYM1jIK3aGKswzaaI",
     "name": "a802388b-d5cf-4be8-8ef6-f6cb5203d6fa.png",
     "rk": "",
@@ -2727,16 +2737,6 @@
     "h": 112.50000000000003,
     "s": 0.06779661016949153,
     "l": 0.5372549019607843,
-    "bucket": "Grayscale"
-  },
-  {
-    "id": "1vCrkzJsjARcRJZXbZsli2bUDB4eNLEZf",
-    "name": "a54078fe-ecfd-4e4e-a179-a45d62942f72.png",
-    "rk": "",
-    "hex": "#888888",
-    "h": 0,
-    "s": 0,
-    "l": 0.5,
     "bucket": "Grayscale"
   },
   {
