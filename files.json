@@ -2000,16 +2000,6 @@
     "bucket": "Brown"
   },
   {
-    "id": "16_JVcAEeGqfqL_tOV4N1IyZ6kGeDpEeA",
-    "name": "7987b1e8-25bd-4fe9-8ba9-186a9e86c23e.png",
-    "rk": "",
-    "hex": "#b98059",
-    "h": 24.375000000000004,
-    "s": 0.4067796610169492,
-    "l": 0.5372549019607843,
-    "bucket": "Brown"
-  },
-  {
     "id": "17zwoRmUG9ed5OYjMXsyYGfmRpo9XtB7I",
     "name": "8258d15a-3057-4646-8b37-8c3102adba64.png",
     "rk": "",
@@ -2727,6 +2717,16 @@
     "h": 74.1176470588236,
     "s": 0.08808290155440411,
     "l": 0.6215686274509804,
+    "bucket": "Grayscale"
+  },
+  {
+    "id": "16_JVcAEeGqfqL_tOV4N1IyZ6kGeDpEeA",
+    "name": "7987b1e8-25bd-4fe9-8ba9-186a9e86c23e.png",
+    "rk": "",
+    "hex": "#888888",
+    "h": 0,
+    "s": 0,
+    "l": 0.5,
     "bucket": "Grayscale"
   },
   {
