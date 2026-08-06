@@ -370,16 +370,6 @@
     "bucket": "Red"
   },
   {
-    "id": "1q3wevAC9RtQyqWEnUSx7GkF0iUmuaY-W",
-    "name": ",uu,t.png",
-    "rk": "",
-    "hex": "#a88977",
-    "h": 22.040816326530607,
-    "s": 0.21973094170403581,
-    "l": 0.5627450980392157,
-    "bucket": "Orange"
-  },
-  {
     "id": "1B0yqJ6rGIQ_1iJe95pSYkz4kPwL9salE",
     "name": "0b5401b7-e524-42f3-83ea-36512df6347e.png",
     "rk": "",
@@ -2040,26 +2030,6 @@
     "bucket": "Brown"
   },
   {
-    "id": "1AbruGOgcKpRV-0CXnlway09yqbFZQXjo",
-    "name": "43535.png",
-    "rk": "",
-    "hex": "#927c6f",
-    "h": 22.285714285714285,
-    "s": 0.13833992094861655,
-    "l": 0.503921568627451,
-    "bucket": "Brown"
-  },
-  {
-    "id": "13Uq0hNsQiBzVsEKWytcEtNum5nc_akXz",
-    "name": "123123.png",
-    "rk": "",
-    "hex": "#847067",
-    "h": 18.620689655172402,
-    "s": 0.12340425531914898,
-    "l": 0.4607843137254902,
-    "bucket": "Brown"
-  },
-  {
     "id": "1XEKFoEu3n_6VpCLmVIA8oMqy68VUTO9b",
     "name": "b7e5007a-351a-4fbc-bd68-3b5e52607b37.png",
     "rk": "",
@@ -2700,6 +2670,16 @@
     "bucket": "Brown"
   },
   {
+    "id": "1q3wevAC9RtQyqWEnUSx7GkF0iUmuaY-W",
+    "name": ",uu,t.png",
+    "rk": "",
+    "hex": "#888888",
+    "h": 0,
+    "s": 0,
+    "l": 0.5,
+    "bucket": "Grayscale"
+  },
+  {
     "id": "1RrIEA_tQ5LN7hfDJqchY5Mkn141N8pGy",
     "name": "1efvbrb.png",
     "rk": "",
@@ -2730,6 +2710,16 @@
     "bucket": "Grayscale"
   },
   {
+    "id": "1AbruGOgcKpRV-0CXnlway09yqbFZQXjo",
+    "name": "43535.png",
+    "rk": "",
+    "hex": "#888888",
+    "h": 0,
+    "s": 0,
+    "l": 0.5,
+    "bucket": "Grayscale"
+  },
+  {
     "id": "1XcQhgbWrTUB6eAAaFzt0ugwqbMGsGJL3",
     "name": "121121.png",
     "rk": "",
@@ -2737,6 +2727,16 @@
     "h": 112.50000000000003,
     "s": 0.06779661016949153,
     "l": 0.5372549019607843,
+    "bucket": "Grayscale"
+  },
+  {
+    "id": "13Uq0hNsQiBzVsEKWytcEtNum5nc_akXz",
+    "name": "123123.png",
+    "rk": "",
+    "hex": "#888888",
+    "h": 0,
+    "s": 0,
+    "l": 0.5,
     "bucket": "Grayscale"
   },
   {
