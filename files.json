@@ -860,16 +860,6 @@
     "bucket": "Orange"
   },
   {
-    "id": "1wKsVgHkEMIcoSKAtyg6zypsTymdZ7pWn",
-    "name": "62219fb8-17dd-45eb-845b-748265f9fe10.png",
-    "rk": "",
-    "hex": "#c28d6b",
-    "h": 23.448275862068975,
-    "s": 0.416267942583732,
-    "l": 0.5901960784313726,
-    "bucket": "Orange"
-  },
-  {
     "id": "1lr-S85rwmAf2agI7JalMO_u8N83bfeP5",
     "name": "759897bd-851a-4410-bf11-3be6d4a03b70.png",
     "rk": "",
@@ -1407,16 +1397,6 @@
     "h": 23.478260869565204,
     "s": 0.2211538461538462,
     "l": 0.592156862745098,
-    "bucket": "Orange"
-  },
-  {
-    "id": "1dEHQ3M2YguwXlVR6k9VWYHw3a6W_4-h3",
-    "name": "fgsgreg.png",
-    "rk": "",
-    "hex": "#ae9889",
-    "h": 24.324324324324323,
-    "s": 0.18592964824120609,
-    "l": 0.6098039215686275,
     "bucket": "Orange"
   },
   {
@@ -2730,6 +2710,16 @@
     "bucket": "Grayscale"
   },
   {
+    "id": "1wKsVgHkEMIcoSKAtyg6zypsTymdZ7pWn",
+    "name": "62219fb8-17dd-45eb-845b-748265f9fe10.png",
+    "rk": "",
+    "hex": "#888888",
+    "h": 0,
+    "s": 0,
+    "l": 0.5,
+    "bucket": "Grayscale"
+  },
+  {
     "id": "1XcQhgbWrTUB6eAAaFzt0ugwqbMGsGJL3",
     "name": "121121.png",
     "rk": "",
@@ -2757,6 +2747,16 @@
     "h": 40.000000000000064,
     "s": 0.04225352112676055,
     "l": 0.5823529411764705,
+    "bucket": "Grayscale"
+  },
+  {
+    "id": "1dEHQ3M2YguwXlVR6k9VWYHw3a6W_4-h3",
+    "name": "fgsgreg.png",
+    "rk": "",
+    "hex": "#888888",
+    "h": 0,
+    "s": 0,
+    "l": 0.5,
     "bucket": "Grayscale"
   },
   {
