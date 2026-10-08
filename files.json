@@ -560,6 +560,16 @@
     "bucket": "Orange"
   },
   {
+    "id": "1gWefqJEnu3-EqjFnApbhq9w2Ys0oyt3g",
+    "name": "41ddb5d6-4efa-4676-96c1-90efd3cacdde.png",
+    "rk": "",
+    "hex": "#c5a28c",
+    "h": 23.157894736842085,
+    "s": 0.3294797687861271,
+    "l": 0.6607843137254903,
+    "bucket": "Orange"
+  },
+  {
     "id": "1YLcpEJDulmi6a_bMwuFfReovXrfXtkdW",
     "name": "47a09b97-fe39-45bf-a752-b559027a551c.png",
     "rk": "",
@@ -597,6 +607,16 @@
     "h": 27.931034482758612,
     "s": 0.3493975903614457,
     "l": 0.6745098039215687,
+    "bucket": "Orange"
+  },
+  {
+    "id": "1wE1R2IATcNaDvwPjkXx_kf0dP-KKs9ds",
+    "name": "72f6ff8a-e775-4aee-84db-6c40d5ca6d72.png",
+    "rk": "",
+    "hex": "#c18d73",
+    "h": 20.000000000000007,
+    "s": 0.38613861386138604,
+    "l": 0.6039215686274509,
     "bucket": "Orange"
   },
   {
@@ -1880,6 +1900,16 @@
     "bucket": "Brown"
   },
   {
+    "id": "1C_KKgeYB2rprGn8gO9xYi4GL9KY8eIxI",
+    "name": "8b901e5d-3c33-43d4-8853-6b3638026c0b.png",
+    "rk": "",
+    "hex": "#b27e61",
+    "h": 21.48148148148149,
+    "s": 0.34468085106382973,
+    "l": 0.5392156862745098,
+    "bucket": "Brown"
+  },
+  {
     "id": "1qkwbcQqpYul5dce8fn0d80th7ewKDB58",
     "name": "9e6ab843-0929-42cb-89a0-9edd2b66e9d4.png",
     "rk": "",
@@ -2677,36 +2707,6 @@
     "h": 12.857142857142867,
     "s": 0.060869565217391335,
     "l": 0.45098039215686275,
-    "bucket": "Grayscale"
-  },
-  {
-    "id": "1C_KKgeYB2rprGn8gO9xYi4GL9KY8eIxI",
-    "name": "8b901e5d-3c33-43d4-8853-6b3638026c0b.png",
-    "rk": "",
-    "hex": "#888888",
-    "h": 0,
-    "s": 0,
-    "l": 0.5,
-    "bucket": "Grayscale"
-  },
-  {
-    "id": "1gWefqJEnu3-EqjFnApbhq9w2Ys0oyt3g",
-    "name": "41ddb5d6-4efa-4676-96c1-90efd3cacdde.png",
-    "rk": "",
-    "hex": "#888888",
-    "h": 0,
-    "s": 0,
-    "l": 0.5,
-    "bucket": "Grayscale"
-  },
-  {
-    "id": "1wE1R2IATcNaDvwPjkXx_kf0dP-KKs9ds",
-    "name": "72f6ff8a-e775-4aee-84db-6c40d5ca6d72.png",
-    "rk": "",
-    "hex": "#888888",
-    "h": 0,
-    "s": 0,
-    "l": 0.5,
     "bucket": "Grayscale"
   },
   {
